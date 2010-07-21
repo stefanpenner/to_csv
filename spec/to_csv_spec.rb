@@ -37,6 +37,12 @@ describe ToCsv do
     end
   end
 
+  describe "to_csv_header" do
+    it "display the default methods called, in the call order" do
+      @email.to_csv_header.should match("name,data,some_boolean")
+    end
+  end
+
   it "drop just_name CSV set to csv" do
     @email.to_csv(:just_name).should match("Stefan Penner")
   end

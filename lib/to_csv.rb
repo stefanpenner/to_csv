@@ -10,19 +10,30 @@ module ToCsv
     self.csv_instructions = Hash.new({})
   end
 
-  class CSVProxy
+  class Interceptor
     def initialize(object,block=nil) 
       @object = object
       @block  = block
       @result = []
+      @method_audit = []
     end
 
-    def to_csv
-      FasterCSV::generate_line(instance_eval &@block)
+    def self.from(object)
+      new(object)
+    end
+
+    def to_block(&block)
+      @block = block
+      self
+    end
+
+    def with_result
+      yield instance_eval(&@block), @method_audit
     end
 
     def method_missing(sym,*args,&block)
-      @result << @object.send(sym)
+      @method_audit << sym
+      @result       << @object.send(sym,*args,&block)
     end
   end
 
@@ -33,6 +44,14 @@ module ToCsv
   end
 
   def to_csv(namespace = :default)
-    CSVProxy.new(self,csv_instructions[namespace]).to_csv
+    Interceptor.from(self).to_block(&csv_instructions[namespace]).with_result do |result,methods|
+      FasterCSV::generate_line(result)
+    end
+  end
+
+  def to_csv_header(namespace = :default)
+    Interceptor.from(self).to_block(&csv_instructions[namespace]).with_result do |result,methods|
+      FasterCSV::generate_line(methods)
+    end
   end
 end
