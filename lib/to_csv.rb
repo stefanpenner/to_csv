@@ -27,7 +27,6 @@ module ToCsv
   end
 
   module ClassMethods
-    attr_accessor :_csv_definitions
     def csv(namespace=:default,&block)
       csv_instructions[namespace] = block
     end
