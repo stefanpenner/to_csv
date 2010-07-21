@@ -40,5 +40,4 @@ describe ToCsv do
   it "drop just_name CSV set to csv" do
     @email.to_csv(:just_name).should match("Stefan Penner")
   end
-  
 end

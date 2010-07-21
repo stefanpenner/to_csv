@@ -2,6 +2,37 @@
 
 Description goes here.
 
+    class Email
+      include ToCsv
+      attr_accessor :name, :data, :some_boolean
+    
+      csv do
+        name
+        data
+        some_boolean
+      end
+    
+      csv :just_name do
+        name
+      end
+    
+      def initialize(name,data,some_boolean)
+        @name = name
+        @data = data
+        @some_boolean = some_boolean
+      end
+    end
+
+   
+    @email = Email.new("Stefan Penner","asdf asdf", true)
+
+    @email.to_csv
+    > "Stefan Penner, asdf asdf, true\n"
+
+    @email.to_csv(:just_name)
+    > "Stefan Penner\n"
+
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
