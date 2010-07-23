@@ -11,6 +11,9 @@ begin
     gem.homepage = "http://github.com/stefanpenner/to_csv"
     gem.authors = ["Stefan Penner"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
+    gem.add_dependency('activesupport','>= 3.0.0.beta4')
+    gem.add_dependency('fastercsv')
+                       
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
