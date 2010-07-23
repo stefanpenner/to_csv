@@ -1,6 +1,7 @@
 require 'active_support/concern'
 require 'active_support/core_ext/class/inheritable_attributes'
 require 'fastercsv' unless RUBY_VERSION  >= "1.9"
+require 'to_csv/interceptor'
 
 module ToCsv
   extend ActiveSupport::Concern
@@ -8,33 +9,6 @@ module ToCsv
   included do 
     class_inheritable_accessor :csv_instructions
     self.csv_instructions = Hash.new({})
-  end
-
-  class Interceptor
-    def initialize(object,block=nil) 
-      @object = object
-      @block  = block
-      @result = []
-      @method_audit = []
-    end
-
-    def self.from(object)
-      new(object)
-    end
-
-    def to_block(&block)
-      @block = block
-      self
-    end
-
-    def with_result
-      yield instance_eval(&@block), @method_audit
-    end
-
-    def method_missing(sym,*args,&block)
-      @method_audit << sym
-      @result       << @object.send(sym,*args,&block)
-    end
   end
 
   module ClassMethods
