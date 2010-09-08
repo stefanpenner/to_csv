@@ -18,14 +18,15 @@ module ToCsv
   end
 
   def to_csv(namespace = :default)
-    Interceptor.from(self).to_block(&csv_instructions[namespace]).with_result do |result,methods|
-      FasterCSV::generate_line(result)
+    Interceptor.from(self).to_block(&csv_instructions[namespace]).with_result do |results,methods|
+      FasterCSV::generate_line(results)
     end
   end
 
   def to_csv_header(namespace = :default)
-    Interceptor.from(self).to_block(&csv_instructions[namespace]).with_result do |result,methods|
+    Interceptor.from(self).to_block(&csv_instructions[namespace]).with_result do |results,methods|
       FasterCSV::generate_line(methods)
     end
   end
 end
+

@@ -22,7 +22,9 @@ module ToCsv
 
     def method_missing(sym,*args,&block)
       @method_audit << sym
-      @result       << @object.send(sym,*args,&block)
+      result       = @object.send(sym,*args,&block)
+      @result      << result
+      result
     end
   end
 end
