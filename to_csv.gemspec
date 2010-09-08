@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{to_csv}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Stefan Penner"]
@@ -29,7 +29,8 @@ Gem::Specification.new do |s|
      "lib/to_csv/interceptor.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
-     "spec/to_csv_spec.rb"
+     "spec/to_csv_spec.rb",
+     "to_csv.gemspec"
   ]
   s.homepage = %q{http://github.com/stefanpenner/to_csv}
   s.rdoc_options = ["--charset=UTF-8"]
