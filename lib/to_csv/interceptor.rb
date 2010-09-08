@@ -17,7 +17,8 @@ module ToCsv
     end
 
     def with_result
-      yield instance_eval(&@block), @method_audit
+      instance_eval(&@block)
+      yield @result, @method_audit
     end
 
     def method_missing(sym,*args,&block)
