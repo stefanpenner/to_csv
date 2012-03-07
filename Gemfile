@@ -1,8 +1,4 @@
-source :gemcutter
+source "http://rubygems.org"
 
-gem 'activesupport','3.0.0.beta4'
-gem "ruby-debug"
-gem 'fastercsv'
-gem "rspec"
-gem 'rake'
-gem 'jeweler'
+# Specify your gem's dependencies in to_csv.gemspec
+gemspec
