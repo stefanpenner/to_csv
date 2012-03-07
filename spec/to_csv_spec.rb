@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require './lib/to_csv'
 
 class Email
   include ToCsv
