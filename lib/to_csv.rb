@@ -1,5 +1,5 @@
 require 'active_support/concern'
-require 'active_support/core_ext/class/inheritable_attributes'
+#require 'active_support/core_ext/class/inheritable_attributes'
 require 'fastercsv' unless RUBY_VERSION  >= "1.9"
 require 'to_csv/interceptor'
 
@@ -7,7 +7,7 @@ module ToCsv
   extend ActiveSupport::Concern
 
   included do 
-    class_inheritable_accessor :csv_instructions
+    class_attribute :csv_instructions
     self.csv_instructions = Hash.new({})
   end
 
